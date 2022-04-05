@@ -18,6 +18,7 @@ body {
   inset: 0;
   overflow: hidden;
   margin: 0;
+  touch-action: manipulation;
 }
 .bg-container {
   position: absolute;
