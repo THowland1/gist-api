@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gist API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="bg-container">
+      <div class="bg"></div>
+    </div>
+    <div class="main-container">
+      <main>
+        <h1>Turn your Github Gist into a REST endpoint</h1>
+        <div class="tile">
+          Just make sure the Gist is <strong>public</strong> and has at least
+          <strong>one file</strong> that is a <strong>JSON array</strong>, and
+          you'll be all set!
+          <small
+            >(<a href="https://gist.github.com/">Make a Gist here!</a>)</small
+          >
+        </div>
+        <hr />
+        <h2>Try it now!</h2>
+        <hr />
+
+        <div>
+          <div class="route-params">
+            <div class="gist-id-chip" data-active>
+              <span>Gist ID</span
+              ><span id="gist-id-control" class="subtle" contenteditable></span>
+            </div>
+          </div>
+          <div class="query-params">
+            <div id="skip-chip" class="chip">
+              <span>skip</span>
+              <span
+                class="subtle"
+                contenteditable
+                onclick="nobubble(event)"
+                onkeyup="numberKeyup(event, skip, setSkip)"
+                onkeydown="numberKeydown(event, skip, setSkip)"
+                >0</span
+              >
+            </div>
+            <div id="top-chip" class="chip" data-active>
+              <span>top</span
+              ><span
+                class="subtle"
+                contenteditable
+                onclick="nobubble(event)"
+                onkeyup="numberKeyup(event, ttop, setTop)"
+                onkeydown="numberKeydown(event, ttop, setTop)"
+                >2</span
+              >
+            </div>
+            <div id="sortby-chip" class="chip">
+              <span>sortby</span
+              ><span
+                class="subtle"
+                contenteditable
+                onclick="nobubble(event)"
+                onkeydown="swallowWhitespace(event, sortby, setSortby)"
+                onkeyup="textKeyup(event, sortby, setSortby)"
+              ></span>
+            </div>
+            <div id="sortdirection-chip" class="chip">
+              <span>sortdirection</span>
+              <select
+                class="subtle"
+                id="sortdirection-control"
+                onclick="nobubble(event)"
+              >
+                <option value="asc">asc</option>
+                <option value="desc">desc</option>
+              </select>
+            </div>
+          </div>
+          <div class="query-params">
+            <div id="auth-chip" class="chip">
+              <span>personal access token</span
+              ><span
+                class="subtle"
+                contenteditable
+                onclick="nobubble(event)"
+                onkeydown="swallowWhitespace(event, authToken, setAuthToken)"
+                onkeyup="textKeyup(event, authToken, setAuthToken)"
+              ></span>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <pre class="tile tile--code" id="curl"></pre>
+        <div id="response-container" class="tile tile--code">
+          <div id="spinner">
+            <div class="lds-dual-ring"></div>
+          </div>
+          <pre id="response"></pre>
+        </div>
+      </main>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

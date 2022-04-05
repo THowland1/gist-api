@@ -1,0 +1,267 @@
+* {
+  box-sizing: border-box;
+}
+h1,
+h2 {
+  margin: 0;
+}
+h2 {
+  font-size: 1.5rem;
+}
+html {
+  position: absolute;
+  inset: 0;
+  font-family: 'Inter', sans-serif;
+}
+body {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  margin: 0;
+}
+.bg-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.main-container {
+  overflow-y: auto;
+  position: absolute;
+  inset: 0;
+}
+main {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  margin: auto;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  max-width: 42rem;
+  flex-direction: column;
+}
+main > * {
+  flex-shrink: 0;
+}
+pre {
+  white-space: break-spaces;
+}
+#gist-id-control {
+  flex: 1;
+  padding: 0.25rem 0.5rem;
+}
+.bg {
+  position: absolute;
+  inset: -19rem;
+  animation-name: northern;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  background: linear-gradient(
+      -45deg,
+      rgba(237, 124, 148, 0.3) 20%,
+      rgba(35, 82, 154, 0.3) 70%
+    ),
+    linear-gradient(10deg, #916b63 7%, #b8ba6f 20%, #ed7c94 40%, #23529a 60%);
+}
+
+@keyframes northern {
+  0% {
+    transform: translate(5%, -2%);
+  }
+  25% {
+    transform: translate(10%, 7%);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: translate(7%, -2%);
+  }
+  85% {
+    transform: translate(6%, 3%) rotate(12deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.tile {
+  background: rgb(0 0 0 / 20%);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.tile--code {
+  background: rgb(0 0 0 / 40%);
+  font-family: monospace;
+  word-wrap: break-word;
+}
+.red {
+  color: #ed7c94;
+}
+.example-gist-id {
+  color: rgb(255 255 255 / 25%);
+  font-family: monospace;
+}
+.example-list {
+  background: rgb(0 0 0 / 20%);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+.example-list-item {
+  padding: 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+.example-list-item:hover {
+  background: rgb(255 255 255 / 3%);
+}
+.example-list-item[data-active] {
+  background: rgb(255 255 255 / 10%);
+}
+
+.gist-id-chip {
+  background: rgb(0 0 0 / 40%);
+  padding: 0.25rem 0.25rem;
+  padding-left: 0.75rem;
+  border-radius: 7rem;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  flex: 1;
+  word-break: break-word;
+}
+.gist-id-chip > span {
+  padding: 0.25rem 0.25rem;
+  display: inline-flex;
+  align-items: center;
+}
+.chip {
+  background: rgb(0 0 0 / 40%);
+  padding: 0.25rem 0.25rem;
+  border-radius: 7rem;
+  display: inline-block;
+  font-size: 12px;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+.chip:hover {
+  opacity: 0.7;
+}
+.chip > span {
+  padding: 0.25rem 0.5rem;
+}
+.chip[data-active] {
+  opacity: 1;
+}
+.subtle {
+  outline: none !important;
+  background: none;
+  border: none;
+  color: inherit;
+  background: rgb(0 0 0 / 20%);
+  border-radius: 1rem;
+  font-family: monospace;
+  padding: 0 0.5rem;
+
+  display: inline-block;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+}
+select.subtle {
+  width: auto;
+}
+.route-params {
+  display: flex;
+}
+a {
+  color: white;
+  font-style: oblique;
+  font-size: small;
+}
+.query-params {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 4.5rem;
+  flex-wrap: wrap;
+}
+@media only screen and (max-width: 600px) {
+  .query-params {
+    padding-left: 0;
+  }
+}
+
+.gist-id-links {
+  padding-left: 4.5rem;
+  line-height: 0;
+}
+.link-button {
+  border: none;
+  background: none;
+  color: rgb(255 255 255 / 90%);
+  text-decoration: underline;
+  line-height: 1;
+  cursor: pointer;
+}
+.link-button > span {
+  opacity: 0.5;
+}
+
+hr {
+  width: 100%;
+  border: solid 1px rgb(255 255 255 / 10%);
+}
+
+/* loadingspinner */
+#response-container {
+  position: relative;
+  height: 20rem;
+  overflow: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+#response-container::-webkit-scrollbar {
+  display: none;
+}
+#spinner {
+  opacity: 0;
+  transition: opacity 0.3s;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+#response {
+  opacity: 0;
+  transition: opacity 0.3s;
+  margin: 0;
+  min-height: 5rem;
+}
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
