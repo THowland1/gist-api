@@ -191,22 +191,35 @@ async function getGist() {
 
   clearTimeout(timeout);
   timeout = setTimeout(async () => {
-    const ddd = await fetch(
-      url,
-      {
-        headers: showAuthToken ? new Headers({
-          "Access-Control-Allow-Origin": "*",
-          'Authorization': `Bearer ${authToken}`,
-          "Access-Control-Allow-Credentials": "true",
-          "Access-Control-Allow-Methods": "GET",
-          "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
-        }) : undefined
-      });
-    const dddd = await ddd.json();
-    response.style.opacity = 01;
-    spinner.style.opacity = 0;
-    response.innerHTML = JSON.stringify(dddd, null, 2);
+    try {
+      const ddd = await fetch(
+        url,
+        {
+          headers: showAuthToken ? new Headers({
+            "Access-Control-Allow-Origin": "*",
+            'Authorization': `Bearer ${authToken}`,
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "GET",
+            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+          }) : undefined
+        });
+      if (!ddd.ok) {
+        const err = await ddd.text();
+        throw new Error(err);
+      }
+      const dddd = await ddd.json();
+      response.style.opacity = 01;
+      spinner.style.opacity = 0;
+      response.innerHTML = JSON.stringify(dddd, null, 2);
+
+    } catch (error) {
+      response.style.opacity = 01;
+      spinner.style.opacity = 0;
+      if (error instanceof Error) {
+        response.innerHTML = `<span class="red">${error.message}</span>`;
+      }
+    }
   }, 200);
 }
 
-getGist();;;;;;
+getGist();

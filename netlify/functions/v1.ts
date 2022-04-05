@@ -56,6 +56,9 @@ export const handler: Handler = async (event, context) => {
     return {
       statusCode: 400,
       body: 'GIST_NOT_FOUND',
+      headers: {
+        'access-control-allow-origin': '*',
+      },
     };
   }
   const gist = gistAttempt.gist;
@@ -67,6 +70,9 @@ export const handler: Handler = async (event, context) => {
     return {
       statusCode: 400,
       body: 'GIST_HAS_NO_FILES',
+      headers: {
+        'access-control-allow-origin': '*',
+      },
     };
   }
   const contentString = gistFiles[gistFileKeys[0]].content;
@@ -75,6 +81,9 @@ export const handler: Handler = async (event, context) => {
     return {
       statusCode: 400,
       body: 'GIST_IS_NOT_JSON',
+      headers: {
+        'access-control-allow-origin': '*',
+      },
     };
   }
   let content = JSON.parse(contentString);
@@ -82,6 +91,9 @@ export const handler: Handler = async (event, context) => {
     return {
       statusCode: 400,
       body: 'GIST_IS_NOT_AN_ARRAY',
+      headers: {
+        'access-control-allow-origin': '*',
+      },
     };
   }
   const totalCount = content.length;
